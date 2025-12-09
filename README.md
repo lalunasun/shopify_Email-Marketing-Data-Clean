@@ -20,7 +20,6 @@ The process has two main parts:
    - Marked as spam  
 3. Use R to:
    - Remove all emails that appear in the suppression list  
-   - Add a flag column `Accepts Email Marketing = "yes"`  
    - Split the final list into multiple CSV files (e.g., 1000 rows per file)
 4. Use Playwright to open Shopify Admin in a browser and import each CSV file.
 
@@ -33,12 +32,10 @@ Make sure you have R installed and the following packages:
 ```r
 install.packages(c("dplyr", "readr", "tidyr"))
 
-3. Playwright – Batch Import CSV Files to Shopify
-3.1 Prerequisites
-
+Playwright – Batch Import CSV Files to Shopify
 Node.js installed
 Playwright installed in the project
 
-3.3 Run the test
+Run the test
 From the project root, run:
 npx playwright test shopify_import.spec.js
