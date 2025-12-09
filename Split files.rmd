@@ -1,0 +1,24 @@
+library(dplyr)
+library(readr)
+library(tidyr)
+
+# Read the cleaned "opened" dataset
+df_final <- read_csv("C:/邮件总/CA邮件筛选/CA_1209/CA_opened-1209.csv")
+
+# Add a new column: Accepts Email Marketing = "yes"
+df_final <- df_final %>%
+  mutate(`Accepts Email Marketing` = "yes")
+
+# Output folder for split files
+output_dir <- "C:/邮件总/CA邮件筛选/CA_1209"
+
+# Split the data into chunks of 1000 rows each
+split_data <- split(df_final, ceiling(seq_along(df_final$Email) / 1000))
+
+# Save each chunk as a separate CSV file
+for (i in seq_along(split_data)) {
+  write_csv(
+    split_data[[i]],
+    paste0(output_dir, "/opened-1209-", i, ".csv")
+  )
+}
